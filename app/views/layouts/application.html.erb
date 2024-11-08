@@ -18,5 +18,14 @@
 
   <body>
     <%= yield %>
+    <% if user_signed_in? %>
+      <p>Hola, <%= current_user.email %> | <%=  button_to 'Cerrar sesión', destroy_user_session_path, method: :delete %></p>
+    <% else %>
+     <%= link_to 'Iniciar sesión', new_user_session_path %>
+    <% end %>
+    <% flash.each do |key, message| %>
+     <div class="alert alert-<%= key %>"><%= message %></div>
+    <% end %>
   </body>
 </html>
+  
